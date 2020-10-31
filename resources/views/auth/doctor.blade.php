@@ -65,14 +65,15 @@
     <tbody>
     @if(!empty($path))
     @foreach($path as $paths)
-    <!-- <td><a href="" target="_blank">
-    <img src="$paths" alt="oops..." style="width:30px;height:30px;">
-    </a> -->
-    <!-- </td> -->
+    <td>
      @php
-    echo $paths;
+    $filename = pathinfo($paths,PATHINFO_FILENAME);
+    $extension = pathinfo($paths,PATHINFO_EXTENSION);
+    
     @endphp
-    @endforeach -->
+    <img src="{{ asset('img/'.$filename.'.'.$extension) }}" alt="oops..." style="width:30px;height:30px;">
+   </td>
+    @endforeach
     @else
     <td>No image</td>
     @endif

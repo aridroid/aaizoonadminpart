@@ -193,8 +193,12 @@ try{
     public function image_view()
     {
         
-        $path = File::allFiles(storage_path('app/public/property'));
+        // $path = Storage::files('app\public\img');
+        // $path = Storage::disk('public');
+        $path = File::files(public_path('img'));
         
+        // $path = File::files('\img');
+
         $doctors = DB::table('doctors_profile')->paginate(4);        
         return view('auth.doctor',compact('path','doctors'));         
     }

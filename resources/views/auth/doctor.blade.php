@@ -16,6 +16,7 @@
 <th scope="col">Doctor Fee</th>
 <th scope="col">Action</th>
 <th scope="col">Is_deleted</th>
+<th scope="col">Is_approved</th>
 </tr>
 </thead>
 <tbody>
@@ -31,11 +32,24 @@
 {{method_field('delete')}}
 <input type="submit" value="Delete" class="btn btn-warning">
 </form>
+
+<form method="post" action= "{{ route('doctor.approve',$doctor->id) }}">
+{{csrf_field()}}
+{{method_field('delete')}}
+<input type="submit" value="Approve" class="btn btn-warning">
+</form>
 </td>
 <td>
 @if($doctor->is_deleted == '1')
 <p class="lead">Yes</p>
 @else($doctor->is_deleted == '0')
+<p class="lead">No</p>
+@endif
+</td>
+<td>
+@if($doctor->is_approved == '1')
+<p class="lead">Yes</p>
+@else($doctor->is_approved == '0')
 <p class="lead">No</p>
 @endif
 </td>
@@ -65,14 +79,18 @@
     <tbody>
     @if(!empty($path))
     @foreach($path as $paths)
+    <tr>
     <td>
      @php
     $filename = pathinfo($paths,PATHINFO_FILENAME);
     $extension = pathinfo($paths,PATHINFO_EXTENSION);
     
     @endphp
-    <img src="{{ asset('img/'.$filename.'.'.$extension) }}" alt="oops..." class="viewImage active"style="width:30px;height:30px;" onclick="openimage()">
+    <a href="{{ url('img/'.$filename.'.'.$extension) }}" target="_blank">
+    <img src="{{ asset('img/'.$filename.'.'.$extension) }}" alt="oops..." class="viewImage act"style="width:30px;height:30px;">
+   </a>
    </td>
+   </tr>
     @endforeach
     @else
     <td>No image</td>
@@ -83,19 +101,22 @@
     </div>
     </div>
 @endsection
-<style>
-.active {
-    background-color:#666;
-    color:white;
-}
-</style>
-<script>
+
+<script type="text/javascript">
 function openimage()
 {
-    var largeImages = document.getElementsByClassName('viewImage');
+    var largeImages = document.getElementsByClassName("viewImage");
     for(var i=0; i < largeImages.length; i++)
     {
+        largeImages[i].addEventListener("click",function(){
+            var current = document.getElementsByClassName("act");
+            if(current.length>0)
+            {
+                current[0].className=current[0].className.replace("act","");
+            }
+            this.className += "act";
 
+        });
     }
     largeImage.style.display = 'block';
     largeImage.style.width = 400 + "px";

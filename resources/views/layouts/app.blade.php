@@ -51,7 +51,10 @@
 .sidenav a:hover {
   color: #f1f1f1;
 }
-
+.act {
+width:400px;
+height:400px;
+}
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}

@@ -190,6 +190,23 @@ try{
         }
         
     }
+    public function doc_appr($id)
+    {
+        // $users=DB::table('book_appointment')->where('user_id', '=', $id)->delete();
+        // return redirect('/pat_list');
+
+        try{
+            $user=DB::table('doctors_profile')->where('id', $id)->update(['is_approved' => '1',]);
+            DB::insert('insert into doctor_verification (doc_id) values (?)', [$id]);
+
+        return redirect('/doc_list')->with('status','Approved!');
+
+        }catch(\Illuminate\Database\QueryException $ex)
+        {
+            return redirect('/doc_list')->with('status','Fail to approve!');
+        }
+        
+    }
     public function image_view()
     {
         

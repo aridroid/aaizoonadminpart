@@ -71,7 +71,7 @@
     $extension = pathinfo($paths,PATHINFO_EXTENSION);
     
     @endphp
-    <img src="{{ asset('img/'.$filename.'.'.$extension) }}" alt="oops..." style="width:30px;height:30px;">
+    <img src="{{ asset('img/'.$filename.'.'.$extension) }}" alt="oops..." class="viewImage active"style="width:30px;height:30px;" onclick="openimage()">
    </td>
     @endforeach
     @else
@@ -83,3 +83,25 @@
     </div>
     </div>
 @endsection
+<style>
+.active {
+    background-color:#666;
+    color:white;
+}
+</style>
+<script>
+function openimage()
+{
+    var largeImages = document.getElementsByClassName('viewImage');
+    for(var i=0; i < largeImages.length; i++)
+    {
+
+    }
+    largeImage.style.display = 'block';
+    largeImage.style.width = 400 + "px";
+    largeImage.style.height = 400 + "px";
+
+    var w = window.open("");
+    w.document.write(largeImage.outerHTML);
+}
+</script>

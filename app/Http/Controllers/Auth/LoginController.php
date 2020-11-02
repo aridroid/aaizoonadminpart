@@ -196,10 +196,20 @@ try{
         // return redirect('/pat_list');
 
         try{
-            $user=DB::table('doctors_profile')->where('id', $id)->update(['is_approved' => '1',]);
-            DB::insert('insert into doctor_verification (doc_id) values (?)', [$id]);
 
-        return redirect('/doc_list')->with('status','Approved!');
+            $doc=DB::table('doctor_verification')->where('doc_id',$id)->first();
+            if(!empty($doc))
+            {
+                return redirect('/doc_list')->with('status','Already approved!');  
+            }
+            else{
+                $user=DB::table('doctors_profile')->where('id', $id)->update(['is_approved' => '1',]);
+                DB::insert('insert into doctor_verification (doc_id) values (?)', [$id]);
+                return redirect('/doc_list')->with('status','Approved!');
+            }
+            
+
+        
 
         }catch(\Illuminate\Database\QueryException $ex)
         {

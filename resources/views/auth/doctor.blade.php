@@ -61,9 +61,9 @@
 
 {!! $doctors->links() !!}
 
-@if(session()->has('message'))
+@if(session()->has('status'))
     <div class="alert alert-success">
-        {{ session()->get('message') }}
+        {{ session()->get('status') }}
     </div>
 @endif
 </div>   
@@ -102,7 +102,7 @@
     </div>
 @endsection
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 function openimage()
 {
     var largeImages = document.getElementsByClassName("viewImage");
@@ -125,4 +125,4 @@ function openimage()
     var w = window.open("");
     w.document.write(largeImage.outerHTML);
 }
-</script>
+</script> -->

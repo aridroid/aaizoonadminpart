@@ -104,7 +104,7 @@
    </tr>
     @endforeach
     @else
-    <td>No image</td>
+    <td>Click to view certificate</td>
     @endif
     </tbody>
     </table>

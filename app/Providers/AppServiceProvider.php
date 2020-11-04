@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Pagination\BootstrapFourPresenter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 

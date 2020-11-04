@@ -1,13 +1,23 @@
 @extends('layouts.app')
 @section('side_nav')
-<div class="sidenav">
+<!-- <div class="sidenav">
 <a href="{{ url('/pat_list') }}">Patient List</a>
   <a href="{{ url('/doc_list') }}">Doctor List</a>
   <a href="{{ url('/gnm_list') }}">GNM list</a>
-</div>
+</div> -->
+<div class="sidebar-heading">Admin Panel</div>
+        <div class="list-group list-group-flush">
+            <a href="{{ url('/pat_list') }}" class="list-group-item list-group-item-action bg-light">Patient List</a>
+            <a href="{{ url('/doc_list') }}" class="list-group-item list-group-item-action bg-light">Doctor List</a>
+            <a href="{{ url('/gnm_list') }}" class="list-group-item list-group-item-action bg-light">GNM list</a>
+            <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Status</a> -->
+        </div>
+        </div>
 @endsection
 @section('content')
-<div class="container">
+<!-- <div class="container tab"> -->
 <table class="table table-bordered mb-5" style="margin-left:100px;">
 <thead>
 <tr class="table-success">
@@ -26,17 +36,17 @@
 <td>{{ $doctor->specialist_in }}</td>
 <td>{{  $doctor->qualification }}</td>
 <td>{{  $doctor->doctor_fee }}</td>
-<td>
+<td style="white-space: nowrap"> 
 <form method="post" action= "{{ route('doctor.destroy',$doctor->id) }}">
 {{csrf_field()}}
 {{method_field('delete')}}
-<input type="submit" value="Delete" class="btn btn-warning">
+<input type="submit" value="Delete" class="btn btn-warning" style="display:inline-block">
 </form>
 
 <form method="post" action= "{{ route('doctor.approve',$doctor->id) }}">
 {{csrf_field()}}
 {{method_field('delete')}}
-<input type="submit" value="Approve" class="btn btn-warning">
+<input type="submit" value="Approve" class="btn btn-warning"style="margin-top:10px;">
 </form>
 </td>
 <td>
@@ -61,12 +71,13 @@
 
 {!! $doctors->links() !!}
 
+
+</div> 
 @if(session()->has('status'))
-    <div class="alert alert-success">
+    <div class="alert alert-success margin-top:20px;">
         {{ session()->get('status') }}
     </div>
-@endif
-</div>   
+@endif  
     </div>
 
     <div class="container" style="margin-top:30px;margin-left:70px;overflow-x:scroll;overflow-y:scroll;">
@@ -99,7 +110,7 @@
     </table>
     </div>
     </div>
-    </div>
+    <!-- </div> -->
 @endsection
 
 <!-- <script type="text/javascript">

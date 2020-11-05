@@ -190,13 +190,14 @@ try{
         }
         
     }
-    public function doc_appr($id)
+    public function doc_appr(Request $request)
     {
         // $users=DB::table('book_appointment')->where('user_id', '=', $id)->delete();
         // return redirect('/pat_list');
 
         try{
-
+                $id=(int)$request->input('id');
+                $full_path = $request->input('path');
             $doc=DB::table('doctor_verification')->where('doc_id',$id)->first();
             if(!empty($doc))
             {
@@ -204,7 +205,7 @@ try{
             }
             else{
                 $user=DB::table('doctors_profile')->where('id', $id)->update(['is_approved' => '1',]);
-                DB::insert('insert into doctor_verification (doc_id) values (?)', [$id]);
+                DB::insert('insert into doctor_verification (doc_id,path) values (?,?)', [$id,$full_path]);
                 return redirect('/doc_list')->with('status','Approved!');
             }
             

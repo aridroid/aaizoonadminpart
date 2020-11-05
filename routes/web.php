@@ -59,7 +59,8 @@ Route::get('/doctor_verify',[App\Http\Controllers\Auth\LoginController::class, '
 Route::DELETE('/pat_del/{id}',[App\Http\Controllers\Auth\LoginController::class, 'pat_del'])->name('patient.destroy');
 Route::DELETE('/doc_del/{id}',[App\Http\Controllers\Auth\LoginController::class, 'doc_del'])->name('doctor.destroy');
 Route::DELETE('/nurse_del/{id}',[App\Http\Controllers\Auth\LoginController::class, 'nur_del'])->name('nurse.destroy');
-Route::DELETE('/doc_appr/{id}',[App\Http\Controllers\Auth\LoginController::class, 'doc_appr'])->name('doctor.approve');
+// Route::DELETE('/doc_appr/{id}',[App\Http\Controllers\Auth\LoginController::class, 'doc_appr'])->name('doctor.approve');
+Route::DELETE('/doc_appr',[App\Http\Controllers\Auth\LoginController::class, 'doc_appr'])->name('doctor.approve');
 Auth::routes();
 
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

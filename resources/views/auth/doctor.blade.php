@@ -43,11 +43,7 @@
 <input type="submit" value="Delete" class="btn btn-warning" style="display:inline-block">
 </form>
 
-<form method="post" action= "{{ route('doctor.approve',$doctor->id) }}">
-{{csrf_field()}}
-{{method_field('delete')}}
-<input type="submit" value="Approve" class="btn btn-warning"style="margin-top:10px;">
-</form>
+
 </td>
 <td>
 @if($doctor->is_deleted == '1')
@@ -81,30 +77,47 @@
     </div>
 
     <div class="container" style="margin-top:30px;margin-left:70px;overflow-x:scroll;overflow-y:scroll;">
+    <a href="{{ url('/doctor_verify') }}">View Certificate</a>
     <div class="row">
-    <div class="col-md-2">
+    <!-- <div class="col-md-2">
      <a href="{{ url('/doctor_verify') }}">View Certificate</a>
-    </div>
+    </div> -->
     <div class="col-md-4">
-    <table>
+    <table class="table table-bordered mb-5">
+    <thead>
+    <tr class="table-success">
+    <th class="col">Doctor ID</th>
+    <th class="col">Click to view Certificate</th>
+    <th class="col">Certificate</th>
+    </tr>
+    </thead>
     <tbody>
     @if(!empty($path))
+    @foreach($doctors as $doctor)
     @foreach($path as $paths)
     <tr>
+    <td>{{ $doctor->id }}</td>
+    <td></td>
     <td>
      @php
     $filename = pathinfo($paths,PATHINFO_FILENAME);
     $extension = pathinfo($paths,PATHINFO_EXTENSION);
-    
+    $full_path = 'img/' . $filename . '.' . $extension;
     @endphp
     <a href="{{ url('img/'.$filename.'.'.$extension) }}" target="_blank">
     <img src="{{ asset('img/'.$filename.'.'.$extension) }}" alt="oops..." class="viewImage act"style="width:30px;height:30px;">
    </a>
+   <form method="post" action= "{{ route('doctor.approve') }}">
+{{csrf_field()}}
+{{method_field('delete')}}
+<input type="hidden" value="{{ $doctor->id }}" name="id">
+<input type="hidden" value="{{ $full_path }}" name="path">
+<input type="submit" value="Approve" class="btn btn-warning"style="margin-top:5px;">
+</form>
    </td>
    </tr>
     @endforeach
-    @else
-    <td>Click to view certificate</td>
+    @endforeach
     @endif
     </tbody>
     </table>

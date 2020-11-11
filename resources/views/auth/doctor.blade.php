@@ -10,7 +10,7 @@
             <a href="{{ url('/pat_list') }}" class="list-group-item list-group-item-action bg-light">Patient List</a>
             <a href="{{ url('/doc_list') }}" class="list-group-item list-group-item-action bg-light">Doctor List</a>
             <a href="{{ url('/gnm_list') }}" class="list-group-item list-group-item-action bg-light">GNM list</a>
-            <a href="{{ url('/ckeditor') }}" class="list-group-item list-group-item-action bg-light">Upload Link</a>
+            <a href="{{ url('/video') }}" class="list-group-item list-group-item-action bg-light">Upload Link</a>
             <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
             <a href="#" class="list-group-item list-group-item-action bg-light">Status</a> -->

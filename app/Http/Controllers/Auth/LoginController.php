@@ -231,5 +231,10 @@ try{
         return view('auth.doctor',compact('path','doctors'));         
     }
 
+    // public function video()
+    // {
+    
+    // }
+
     
 }

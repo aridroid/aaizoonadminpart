@@ -21,7 +21,7 @@ class CKEditorController extends Controller
     // }
     public function index()
     {
-        return view('ckeditor.ckeditor');
+        return view('auth.video');
     }
 
     // public function store(Request $request)

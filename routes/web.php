@@ -44,7 +44,13 @@ Route::get('/nur', function () {
 
 })->middleware('auth');
 
-Route::get('/ckeditor',[App\Http\Controllers\CKEditorController::class,'index']);
+Route::get('/video', function () {
+    return view('auth.video');
+
+})->middleware('auth');
+
+
+// Route::get('/link',[App\Http\Controllers\Auth\LoginController::class, 'video']);
 
 // This is a route for insert data 
 // Route::get('/insert',[App\Http\Controllers\Auth\LoginController::class, 'insert']);

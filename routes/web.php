@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\CKEditorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +44,7 @@ Route::get('/nur', function () {
 
 })->middleware('auth');
 
+Route::get('/ckeditor',[App\Http\Controllers\CKEditorController::class,'index']);
 
 // This is a route for insert data 
 // Route::get('/insert',[App\Http\Controllers\Auth\LoginController::class, 'insert']);

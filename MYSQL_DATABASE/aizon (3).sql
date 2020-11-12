@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 05, 2020 at 01:12 PM
+-- Host: localhost
+-- Generation Time: Nov 12, 2020 at 01:44 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -230,9 +230,9 @@ CREATE TABLE `doctors_profile` (
 
 INSERT INTO `doctors_profile` (`id`, `user_id`, `date_of_birth`, `college_attended`, `qualification`, `address`, `specialist_in`, `doctor_fee`, `is_preconsultation`, `pre_consultation_fee`, `bed`, `no_of_bed`, `ventilator`, `blood_bank`, `emergency`, `ambulance`, `ambulance_contact`, `medical_license`, `experience`, `is_video_chat`, `created_at`, `updated_at`, `is_deleted`, `is_approved`) VALUES
 (1, 1, NULL, NULL, NULL, NULL, NULL, 100.50, '1', 500.00, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:06:22', '2020-07-26 10:38:47', '1', '1'),
-(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:10:47', '2020-07-22 18:10:47', '0', '0'),
+(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:10:47', '2020-07-22 18:10:47', '0', '1'),
 (3, 3, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:12:31', '2020-07-22 18:12:31', '0', '1'),
-(4, 4, NULL, 'College is good', NULL, NULL, NULL, NULL, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:15:45', '2020-07-22 18:15:45', '0', '0'),
+(4, 4, NULL, 'College is good', NULL, NULL, NULL, NULL, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:15:45', '2020-07-22 18:15:45', '0', '1'),
 (5, 5, NULL, 'College is good', NULL, NULL, NULL, 500.00, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:17:06', '2020-07-22 18:17:06', '0', '0'),
 (6, 6, NULL, NULL, NULL, NULL, NULL, 500.00, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 18:17:40', '2020-07-22 18:17:40', '0', '0'),
 (7, 7, NULL, 'test college', 'MS AIIMS', NULL, 'Neurologist', 500.00, '0', NULL, 'n', NULL, 'n', 'n', 'n', 'n', NULL, NULL, NULL, '0', '2020-07-22 21:18:53', '2020-07-22 21:18:53', '1', '0'),
@@ -339,7 +339,9 @@ CREATE TABLE `doctor_verification` (
 --
 
 INSERT INTO `doctor_verification` (`id`, `doc_id`, `path`) VALUES
-(4, 1, 'img/WBP.png');
+(4, 1, 'img/WBP.png'),
+(5, 2, 'img/WBP.png'),
+(6, 4, 'img/WBP.png');
 
 -- --------------------------------------------------------
 
@@ -391,6 +393,28 @@ INSERT INTO `files_upload` (`file_upload_id`, `uploaded_for_patient_id`, `upload
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `image`
+--
+
+CREATE TABLE `image` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `des` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `image`
+--
+
+INSERT INTO `image` (`id`, `title`, `des`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Image', '<p>A <em>little image</em></p>', 'http://localhost/aizon/public/images/doctor_1605182066.png', '2020-11-12 06:24:26', '2020-11-12 06:24:26');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -405,7 +429,8 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2020_10_22_161044_create_admins_table', 1);
+(1, '2020_10_22_161044_create_admins_table', 1),
+(2, '2020_11_12_092132_create_image_table', 2);
 
 -- --------------------------------------------------------
 
@@ -699,6 +724,28 @@ CREATE TABLE `pincodes` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `video_post`
+--
+
+CREATE TABLE `video_post` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `url` text NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `video_post`
+--
+
+INSERT INTO `video_post` (`id`, `title`, `description`, `url`, `updated_at`, `created_at`) VALUES
+(1, 'Sun Raha Hai', '<p><strong>Sun Raha Hai Na</strong> Tu Female version&quot; in melodious voice of Shreya Ghoshal from movie &quot;Aashiqui 2&quot; starring Aditya Roy Kapur, Shraddha Kapoor. It is considered as &#39;The Love Song Of Year&#39; 2013. The movie is a musical journey of two lovers who go through love and hate, twists and turbulence, success and failure in their lives. The music of this movie is composed by Mithoon, Jeet Ganguli and Ankit Tiwari.</p>', 'https://youtu.be/inEu2qQuGZ8', '2020-11-12 01:45:54', '2020-11-12 01:45:54');
+
 --
 -- Indexes for dumped tables
 --
@@ -717,9 +764,21 @@ ALTER TABLE `doctor_verification`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `image`
+--
+ALTER TABLE `image`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `video_post`
+--
+ALTER TABLE `video_post`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -736,13 +795,25 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `doctor_verification`
 --
 ALTER TABLE `doctor_verification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `image`
+--
+ALTER TABLE `image`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `video_post`
+--
+ALTER TABLE `video_post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

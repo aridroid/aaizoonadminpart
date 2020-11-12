@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Image;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -269,9 +270,48 @@ try{
         return view('auth.showvideo',['videos' => $videos]);
     }
 
-    public function uploadbanner()
+    public function uploadbanner(Request $request)
     {
+        if($request->has('_token') && $request->hasFile('banner'))
+        {
 
+            if($request->file('banner')->isValid())
+            {
+                $validated = $request->validate([
+                    'desc' => 'string|required',
+                    'title' => 'required',
+                    'image' => 'mimes:jpeg,png,jpg|max:2048',
+                ]);
+
+                $originName = $request->file('banner')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('banner')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+        
+            $request->file('banner')->move(public_path('images'), $fileName);
+   
+            
+            // $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('images/'.$fileName); 
+
+            $post = Image::create([
+                'title' => $request->input('title'),
+                'des' => $request->input('desc'),
+                'image' => $url,
+            ]);
+            return redirect('/uploadbanner')->with('message','Successfully Post');
+
+            }
+            
+            // $msg = 'Image uploaded successfully';
+        
+        }
+    }
+
+    public function showbanner()
+    {
+        $banners = DB::table('image')->paginate(4);
+        return view('auth.showbanner',['banners' => $banners]);
     }
 
     

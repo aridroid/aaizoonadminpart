@@ -56,7 +56,7 @@ Route::get('/uploadbanner', function () {
 
 
 Route::post('/link',[App\Http\Controllers\Auth\LoginController::class, 'video'])->name('video.save');
-Route::post('/upload',[App\Http\Controllers\Auth\LoginController::class, 'image_upload'])->name('image.save');
+Route::post('/upload',[App\Http\Controllers\Auth\LoginController::class, 'uploadbanner'])->name('image.save');
 Route::get('/showvideo',[App\Http\Controllers\Auth\LoginController::class, 'showvideo']);
 Route::get('/showbanner',[App\Http\Controllers\Auth\LoginController::class, 'showbanner']);
 

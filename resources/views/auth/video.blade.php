@@ -50,7 +50,15 @@
     </div>
 @endif
 
-
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
 
 <script src="{{ asset('ckeditor/ckeditor.js')  }}" type="text/javascript"></script>

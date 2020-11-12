@@ -49,8 +49,16 @@ Route::get('/video', function () {
 
 })->middleware('auth');
 
+Route::get('/uploadbanner', function () {
+    return view('auth.banner');
 
-// Route::get('/link',[App\Http\Controllers\Auth\LoginController::class, 'video']);
+})->middleware('auth');
+
+
+Route::post('/link',[App\Http\Controllers\Auth\LoginController::class, 'video'])->name('video.save');
+Route::post('/upload',[App\Http\Controllers\Auth\LoginController::class, 'image_upload'])->name('image.save');
+Route::get('/showvideo',[App\Http\Controllers\Auth\LoginController::class, 'showvideo']);
+Route::get('/showbanner',[App\Http\Controllers\Auth\LoginController::class, 'showbanner']);
 
 // This is a route for insert data 
 // Route::get('/insert',[App\Http\Controllers\Auth\LoginController::class, 'insert']);

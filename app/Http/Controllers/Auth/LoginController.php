@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -231,10 +232,47 @@ try{
         return view('auth.doctor',compact('path','doctors'));         
     }
 
-    // public function video()
-    // {
+    public function video(Request $request)
+    {
+            $validator = Validator::make($request->all(), [
+                'editor' => 'required',
+                'desc' => 'required',
+                'title' => 'required',
+            ]);
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+                return back()->withErrors($errors)->withInput($request->input());
+            }
+            else{
+
+                try {
+                    $post = Post::create([
+                        'title' => $request->input('title'),
+                        'description' => $request->input('desc'),
+                        'url' => $request->input('editor'),
+                    ]);
     
-    // }
+                    return redirect('/video')->with('message','Successfully Post');
+                    }
+                    catch(\Illuminate\Database\QueryException $ex)
+                {
+                    return redirect('/video')->with('message','Unscuccessful!!!');
+                }
+                
+            }
+
+    }
+
+    public function showvideo()
+    {
+        $videos = DB::table('video_post')->paginate(4);
+        return view('auth.showvideo',['videos' => $videos]);
+    }
+
+    public function uploadbanner()
+    {
+
+    }
 
     
 }
